@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "author": "The Bin - Hack Club",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 96,
+      "left": -158.36,
+      "attrs": { "fastTLS": "1" }
+    },
+    {
+      "type": "wokwi-membrane-keypad",
+      "id": "wokwi-membrane-keypad-0",
+      "top": 218.8,
+      "left": -4,
+      "attrs": {}
+    },
+    { "type": "wokwi-buzzer", "id": "wokwi-buzzer-0", "top": 597.6, "left": -132.6, "attrs": {} },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "wokwi-slide-potentiometer-0",
+      "top": 533,
+      "left": -586.6,
+      "attrs": {}
+    },
+    { "type": "wokwi-dht22", "id": "wokwi-dht22-0", "top": 864.3, "left": 4.2, "attrs": {} },
+    {
+      "type": "board-ssd1306",
+      "id": "board-ssd1306-0",
+      "top": 185.54,
+      "left": -297.37,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led-bar-graph",
+      "id": "wokwi-led-bar-graph-0",
+      "top": 792,
+      "left": 187.2,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "board-ssd1306-0:VCC", "green", [ "h0" ] ],
+    [ "board-ssd1306-0:SDA", "esp:21", "green", [ "v0" ] ],
+    [ "board-ssd1306-0:SCL", "esp:22", "green", [ "v0" ] ],
+    [ "board-ssd1306-0:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "wokwi-slide-potentiometer-0:GND", "esp:GND.3", "limegreen", [ "v0" ] ],
+    [ "wokwi-slide-potentiometer-0:VCC", "esp:5V", "red", [ "h0" ] ],
+    [ "wokwi-slide-potentiometer-0:SIG", "esp:32", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
