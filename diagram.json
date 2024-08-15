@@ -3,54 +3,66 @@
   "author": "The Bin - Hack Club",
   "editor": "wokwi",
   "parts": [
+    { "type": "wokwi-breadboard-mini", "id": "bb1", "top": -107, "left": -328.8, "attrs": {} },
     {
       "type": "board-esp32-devkit-c-v4",
       "id": "esp",
-      "top": 96,
-      "left": -158.36,
+      "top": 230.4,
+      "left": -139.16,
       "attrs": { "fastTLS": "1" }
     },
     {
       "type": "wokwi-membrane-keypad",
       "id": "wokwi-membrane-keypad-0",
-      "top": 218.8,
-      "left": -4,
+      "top": 132.4,
+      "left": 72.8,
       "attrs": {}
     },
-    { "type": "wokwi-buzzer", "id": "wokwi-buzzer-0", "top": 597.6, "left": -132.6, "attrs": {} },
-    {
-      "type": "wokwi-slide-potentiometer",
-      "id": "wokwi-slide-potentiometer-0",
-      "top": 533,
-      "left": -586.6,
-      "attrs": {}
-    },
-    { "type": "wokwi-dht22", "id": "wokwi-dht22-0", "top": 864.3, "left": 4.2, "attrs": {} },
+    { "type": "wokwi-buzzer", "id": "wokwi-buzzer-0", "top": 242.4, "left": -391.8, "attrs": {} },
     {
       "type": "board-ssd1306",
       "id": "board-ssd1306-0",
-      "top": 185.54,
-      "left": -297.37,
+      "top": 233.54,
+      "left": -258.97,
       "attrs": {}
     },
     {
       "type": "wokwi-led-bar-graph",
       "id": "wokwi-led-bar-graph-0",
-      "top": 792,
-      "left": 187.2,
+      "top": -4.8,
+      "left": -408,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "pot1",
+      "top": 485,
+      "left": -385,
+      "attrs": { "travelLength": "64" }
     }
   ],
   "connections": [
     [ "pico:GP0", "$serialMonitor:RX", "", [] ],
     [ "pico:GP1", "$serialMonitor:TX", "", [] ],
-    [ "esp:3V3", "board-ssd1306-0:VCC", "green", [ "h0" ] ],
-    [ "board-ssd1306-0:SDA", "esp:21", "green", [ "v0" ] ],
-    [ "board-ssd1306-0:SCL", "esp:22", "green", [ "v0" ] ],
-    [ "board-ssd1306-0:GND", "esp:GND.2", "black", [ "v0" ] ],
-    [ "wokwi-slide-potentiometer-0:GND", "esp:GND.3", "limegreen", [ "v0" ] ],
-    [ "wokwi-slide-potentiometer-0:VCC", "esp:5V", "red", [ "h0" ] ],
-    [ "wokwi-slide-potentiometer-0:SIG", "esp:32", "green", [ "h0" ] ]
+    [ "board-ssd1306-0:SCL", "esp:22", "green", [ "v-19.2", "h201.9", "v86.4" ] ],
+    [ "board-ssd1306-0:SDA", "esp:21", "green", [ "v-28.8", "h201.67", "v124.8" ] ],
+    [ "board-ssd1306-0:GND", "esp:GND.2", "green", [ "v-38.4", "h211.2" ] ],
+    [ "board-ssd1306-0:VCC", "esp:3V3", "green", [ "v-48", "h9.75" ] ],
+    [ "wokwi-buzzer-0:1", "esp:GND.1", "orange", [ "v19.2", "h115.2", "v-38.4" ] ],
+    [ "wokwi-buzzer-0:2", "esp:12", "orange", [ "v9.6", "h95.6", "v-38.4" ] ],
+    [ "pot1:GND", "esp:GND.3", "gold", [ "v0", "h30.28", "v-211.2" ] ],
+    [ "pot1:VCC", "esp:5V", "gold", [ "h0", "v-86.4" ] ],
+    [ "pot1:SIG", "esp:19", "gold", [ "h-9.6", "v-87.2", "h364.8", "v-134.4" ] ],
+    [ "esp:GND.2", "bb1:17b.j", "blue", [ "v-153.6", "h-124.8" ] ],
+    [ "wokwi-led-bar-graph-0:C10", "bb1:5b.j", "green", [ "h0.22", "v19.19", "h86.4" ] ],
+    [ "wokwi-led-bar-graph-0:C8", "bb1:7b.j", "green", [ "h0.22", "v57.59", "h105.6" ] ],
+    [ "wokwi-led-bar-graph-0:C7", "bb1:8b.j", "green", [ "h0.22", "v76.79", "h124.8", "v-57.6" ] ],
+    [ "wokwi-led-bar-graph-0:C6", "bb1:6b.j", "green", [ "h0.22", "v67.19", "h105.6" ] ],
+    [ "wokwi-led-bar-graph-0:C5", "bb1:9b.j", "green", [ "h0.22", "v105.59", "h134.4" ] ],
+    [ "wokwi-led-bar-graph-0:C4", "bb1:10b.j", "green", [ "h0.22", "v124.8", "h144" ] ],
+    [ "wokwi-led-bar-graph-0:C3", "bb1:11b.j", "green", [ "h0.22", "v144", "h153.6" ] ],
+    [ "wokwi-led-bar-graph-0:C2", "bb1:12b.j", "green", [ "h0.22", "v163.2", "h163.2" ] ],
+    [ "wokwi-led-bar-graph-0:C1", "bb1:13b.j", "green", [ "v182.4", "h173.02" ] ]
   ],
   "dependencies": {}
 }

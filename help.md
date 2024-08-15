@@ -1,4 +1,4 @@
-# Welcome to The Bin! 🦝
+       # Welcome to The Bin! 🦝
 
 Now that you've thrown some parts into The Bin, it's time to turn that trash into treasure! 🗑️➡️💎
 
