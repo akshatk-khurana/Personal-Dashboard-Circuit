@@ -6,7 +6,6 @@ import time
 WIDTH = 128
 HEIGHT = 64
 
-vol = 0
 # Assign all the pins
 screen_pin = I2C(0, 
              scl=Pin(22), 
@@ -18,31 +17,59 @@ slider = ADC(slider_pin)
 slider.width(ADC.WIDTH_12BIT)
 slider.atten(ADC.ATTN_11DB)
 
-LED_bar_pins = [13, 12, 14, 27, 26, 25, 33, 32, 35, 19]
+LED_bar_pins = [13, 12, 14, 27, 26, 25, 33, 32, 18, 19]
+LED_bar_pins.reverse()
 
-pad_row_pins = []
-pad_col_pins = []
+keypad_keys = [
+    ['1', '2', '3', 'A'],
+    ['4', '5', '6', 'B'],
+    ['7', '8', '9', 'C'],
+    ['*', '0', '#', 'D']
+]
+
+keypad_row = [15, 2, 0, 4]
+keypad_col = [16, 17, 5, 35]
+
+row_pins = [Pin(i, Pin.OUT) for i in keypad_row]
+col_pins = [Pin(i, Pin.IN, Pin.PULL_DOWN) for i in keypad_col]
 
 buzzer_pin = Pin(23)
 buzzer_pwm = PWM(buzzer_pin)
 
-# Functions
+# Define functions
+def show_bar_LED(count):
+    for index, pin in enumerate(LED_bar_pins):
+      if (index == count):
+        break
+      led = Pin(pin, Pin.OUT)
+      led.on()
+
+def clear_bar_LED():
+  for pin in LED_bar_pins:
+      led = Pin(pin, Pin.OUT)
+      led.off()
+
 def play_note(note, duration):
   buzzer_pwm.freq(notes[note])
   buzzer_pwm.duty(512)
   time.sleep_ms(duration)
   buzzer_pwm.duty(0)
 
-def show_bar_LED(count):
-    for pin in LED_bar_pins[:count]:
-        led = Pin(pin, Pin.OUT)
-        led.on()
-
 def clear_screen():
   screen.fill(0)
 
 def convert_reading(reading):
-  return int(reading * 9 / 4095)
+  return int(reading * 10 / 4095)
+
+def check_keypad_input():
+    for i, row in enumerate(row_pins):
+        row.on()
+        for j, col in enumerate(col_pins):
+            if col.value() == 1:
+                row.off()
+                return keys[i][j]
+        row.off()
+    return None
 
 # Buzzer stuff
 notes = {
@@ -56,11 +83,22 @@ notes = {
     'C5': 523.25,
 }
 
+vol = 0
+
 # Main code
-show_bar_LED(10)
 while True:
-  vol = convert_reading(slider.read())
+  clear_screen()
+  clear_bar_LED()
   show_bar_LED(vol)
+
+  if (vol != slider.read()):
+    vol = convert_reading(slider.read())
+
+  """pressed_key = check_keypad_input()
+  if pressed_key != None:
+    screen.text("A key has been pressed!", 10, 2)
+    screen.show()"""
+
 
 # Closing code
 buzzer_pwm.deinit()
