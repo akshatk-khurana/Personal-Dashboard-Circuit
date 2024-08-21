@@ -6,8 +6,8 @@
     {
       "type": "board-esp32-devkit-c-v4",
       "id": "esp",
-      "top": 229.26,
-      "left": -137.5,
+      "top": 230.4,
+      "left": -139.16,
       "attrs": { "env": "micropython-20231005-v1.21.0" }
     },
     {
@@ -27,8 +27,8 @@
     {
       "type": "wokwi-slide-potentiometer",
       "id": "pot1",
-      "top": 456.2,
-      "left": -154.6,
+      "top": 465.8,
+      "left": -202.6,
       "attrs": { "travelLength": "10" }
     },
     { "type": "wokwi-membrane-keypad", "id": "keypad1", "top": -21.2, "left": 101.6, "attrs": {} },
@@ -45,8 +45,8 @@
     [ "esp:RX", "$serialMonitor:TX", "", [] ],
     [ "board-ssd1306-0:GND", "esp:GND.2", "orange", [ "v-38.4", "h86.4", "v172.8" ] ],
     [ "board-ssd1306-0:VCC", "esp:3V3", "red", [ "v-19.2", "h-76.65", "v153.6" ] ],
-    [ "board-ssd1306-0:SCL", "esp:22", "blue", [ "h77.1", "v153.6" ] ],
-    [ "board-ssd1306-0:SDA", "esp:21", "blue", [ "h76.87", "v182.4" ] ],
+    [ "board-ssd1306-0:SCL", "esp:22", "blue", [ "v-28.8", "h77.1", "v181.26" ] ],
+    [ "board-ssd1306-0:SDA", "esp:21", "blue", [ "v-19.2", "h76.87", "v200.46" ] ],
     [ "pot1:SIG", "esp:34", "blue", [ "h-9.6", "v-250.4" ] ],
     [ "esp:5V", "pot1:VCC", "red", [ "h0" ] ],
     [ "esp:GND.1", "pot1:GND", "orange", [ "h-9.45", "v86.4", "h124.8" ] ],
@@ -70,16 +70,16 @@
     [ "wokwi-led-bar-graph-0:A8", "esp:32", "blue", [ "h-19.2", "v-105.61", "h144", "v48" ] ],
     [ "wokwi-led-bar-graph-0:A9", "esp:18", "blue", [ "h0", "v67.19", "h249.6", "v-115.2" ] ],
     [ "wokwi-led-bar-graph-0:A10", "esp:19", "blue", [ "h0", "v57.59", "h249.6", "v-124.8" ] ],
-    [ "esp:15", "keypad1:R1", "blue", [ "v0" ] ],
-    [ "esp:2", "keypad1:R2", "blue", [ "h192", "v19.2", "h55.94", "v-94.86" ] ],
+    [ "esp:15", "keypad1:R1", "blue", [ "h28.8", "v-86.4" ] ],
+    [ "esp:2", "keypad1:R2", "blue", [ "h201.6", "v19.2", "h46.34", "v-96" ] ],
     [ "esp:0", "keypad1:R3", "blue", [ "h192", "v38.4", "h65.54", "v-104.46" ] ],
-    [ "esp:4", "keypad1:R4", "blue", [ "h192", "v57.6", "h38.4" ] ],
-    [ "esp:16", "keypad1:C1", "blue", [ "h192", "v76.8", "h38.4" ] ],
-    [ "esp:17", "keypad1:C2", "blue", [ "h192", "v86.4", "h57.6" ] ],
-    [ "esp:5", "keypad1:C3", "blue", [ "h192", "v96", "h67.2" ] ],
-    [ "esp:35", "keypad1:C4", "blue", [ "h-9.45", "v-86.4", "h163.2", "v230.4", "h211.2" ] ],
+    [ "esp:4", "keypad1:R4", "blue", [ "h182.4", "v57.6", "h86.6" ] ],
+    [ "esp:16", "keypad1:C1", "blue", [ "h172.8", "v76.8", "h105.7" ] ],
+    [ "esp:17", "keypad1:C2", "blue", [ "h163.2", "v96", "h124.8" ] ],
+    [ "esp:5", "keypad1:C3", "blue", [ "h153.6", "v115.2", "h144.15" ] ],
+    [ "esp:35", "keypad1:C4", "blue", [ "h-9.45", "v-86.4", "h163.2", "v249.6", "h249.9" ] ],
     [ "bz1:1", "esp:23", "blue", [ "v0", "h-86.4", "v-288" ] ],
-    [ "bz1:2", "esp:GND.3", "orange", [ "v0", "h57.2", "v-240" ] ]
+    [ "bz1:2", "esp:GND.3", "orange", [ "h28.4", "v-240" ] ]
   ],
   "serialMonitor": { "display": "auto", "newline": "lf", "convertEol": false },
   "dependencies": {}

@@ -1,14 +1,15 @@
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+print("_____________________________________________________")
 
 from machine import Pin, I2C, ADC, PWM
 import ssd1306
 from time import sleep
+import urequests
 
 # Define important variables
 WIDTH = 128
 HEIGHT = 64
 
-notes = {
+note_mappings = {
     'C4': 261.63,
     'D4': 293.66,
     'E4': 329.63,
@@ -18,6 +19,8 @@ notes = {
     'B4': 493.88,
     'C5': 523.25,
 }
+
+note_list = []
 
 # Assign all the pins
 screen_pin = I2C(0, scl=Pin(22), sda=Pin(21))
@@ -67,11 +70,23 @@ def clear_bar_LED():
 def convert_volume(volume):
     return int(volume * 1024 / 10)
 
-def clear_screen():
-    screen.fill(0)
-
 def convert_reading(reading):
     return int(reading * 10 / 4095)
+
+def convert_time(s):
+    minutes = 0
+    seconds = 0
+
+    if s < 60:
+        seconds = 0
+    else:
+        minutes = s // 60
+        seconds = s % 60
+    
+    return minutes, seconds
+
+def clear_screen():
+    screen.fill(0)
 
 def check_keypad_input():
     for row_index, row in enumerate(row_pins):
@@ -79,23 +94,59 @@ def check_keypad_input():
         for col_index, col in enumerate(col_pins):
             if col.value() == 0:
                 return keypad_keys[row_index][col_index]
+                row.value(1)
         row.value(1)
     return None
 
-
 def play_note(note, duration, volume):
-    buzzer_pwm.freq(int(notes[note]))
+    frequency = int(note_mappings[note])
+
+    buzzer_pwm.freq(frequency)
     buzzer_pwm.duty(volume)
+
     time.sleep_ms(duration)
     buzzer_pwm.duty(0)
 
+def home_screen():
+    screen.text("Dashboard", 26, 0)
+    screen.text("Commands are:", 10, 12)
+    screen.text("A for music.", 10, 22)
+    screen.text("B for stopwatch.", 10, 32)
+    screen.text("c for timer.", 10, 42)
+    screen.text("# to quit.", 10, 52)
+
+def music_screen():
+    clear_screen()
+    screen.text("Playing music!", 26, 0)
+    screen.text("* for home.", 26, 8)
+
+def stopwatch_screen(seconds):
+    pass
+
+def timer_screen(seconds):
+    pass
+
 print("Functions defined!")
 
+screen_functions = {
+    "home" : home_screen,
+    "music" : music_screen,
+    "timer" : timer_screen,
+    "stopwatch" : stopwatch_screen,
+}
 
 # Main code 
+current_screen = "home"
 vol = 0
+timer = 0
+input_string = ""
+note_cursor = 0
+
+home_screen()
 while True:
-    clear_screen()
+    if current_screen == "home":
+        timer = 0
+
     clear_bar_LED()
     show_bar_LED(vol)
 
@@ -110,9 +161,29 @@ while True:
 
         if pressed_key == "#":
             print("Quitting dashboard...")
+            break
+        
+        if current_screen == "home":
+            if pressed_key == "A":
+                current_screen = "music"
+                music_screen()
+
+            elif pressed_key == "B":
+                current_screen = "timer"
+
+            elif pressed_key == "C":
+                current_screen = "stopwatch"
+            
+    if current_screen == "timer":
+        timer_screen()
+        timer -= 1
+
+    if current_screen == "music":
+        note_cursor += 1
+        # play_note()
 
     screen.show()
-
+    sleep(0.1)
 
 # Closing code
 buzzer_pwm.deinit()
