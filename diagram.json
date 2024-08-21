@@ -35,15 +35,14 @@
     {
       "type": "wokwi-buzzer",
       "id": "bz1",
-      "top": 98.4,
-      "left": -257.4,
+      "top": 472.8,
+      "left": 40.2,
       "attrs": { "volume": "0.1" }
-    },
-    { "type": "wokwi-dht22", "id": "dht1", "top": 67.5, "left": -370.2, "attrs": {} }
+    }
   ],
   "connections": [
-    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
-    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
     [ "board-ssd1306-0:GND", "esp:GND.2", "orange", [ "v-38.4", "h86.4", "v172.8" ] ],
     [ "board-ssd1306-0:VCC", "esp:3V3", "red", [ "v-19.2", "h-76.65", "v153.6" ] ],
     [ "board-ssd1306-0:SCL", "esp:22", "blue", [ "h77.1", "v153.6" ] ],
@@ -79,11 +78,9 @@
     [ "esp:17", "keypad1:C2", "blue", [ "h192", "v86.4", "h57.6" ] ],
     [ "esp:5", "keypad1:C3", "blue", [ "h192", "v96", "h67.2" ] ],
     [ "esp:35", "keypad1:C4", "blue", [ "h-9.45", "v-86.4", "h163.2", "v230.4", "h211.2" ] ],
-    [ "bz1:1", "esp:GND.3", "orange", [ "v0", "h-48", "v-105.6", "h316.8", "v240" ] ],
-    [ "bz1:2", "esp:23", "blue", [ "v0", "h38", "v-86.4", "h230.4", "v172.8" ] ],
-    [ "dht1:VCC", "esp:3V3", "red", [ "v9.6", "h76.8", "v-9.6" ] ],
-    [ "dht1:GND", "esp:GND.2", "orange", [ "v28.8", "h288" ] ],
-    [ "dht1:SDA", "esp:D1", "blue", [ "v278.4", "h326.5", "v-48" ] ]
+    [ "bz1:1", "esp:23", "blue", [ "v0", "h-86.4", "v-288" ] ],
+    [ "bz1:2", "esp:GND.3", "orange", [ "v0", "h57.2", "v-240" ] ]
   ],
+  "serialMonitor": { "display": "auto", "newline": "lf", "convertEol": false },
   "dependencies": {}
 }
