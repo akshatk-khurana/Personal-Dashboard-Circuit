@@ -7,14 +7,6 @@ I've done the wiring colours to make it easy to know what wire is for what;
 - Red wires are for VCC/3V3 pins
 
 # Default Bin Stuff
-Now that you've thrown some parts into The Bin, it's time to turn that trash into treasure! 🗑️➡️💎
-
-Wire up your parts and write some code to make them work together. If you need
-help with a part, click the "?" above it.
-
-If you want to see examples, check here:
-https://hack.club/bin-example
-
 You can get help by chatting with other high schoolers on the Hack Club Slack in
 the #electronics channel:
 👉 https://hackclub.com/slack 👈

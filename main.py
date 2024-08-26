@@ -3,7 +3,6 @@ print("_____________________________________________________")
 from machine import Pin, I2C, ADC, PWM
 import ssd1306
 from time import sleep
-import urequests
 
 # Define important variables
 WIDTH = 128
@@ -93,10 +92,12 @@ def check_keypad_input():
         row.value(0)
         for col_index, col in enumerate(col_pins):
             if col.value() == 0:
-                return keypad_keys[row_index][col_index]
+                key = keypad_keys[row_index][col_index]
+                sleep(0.1)
                 row.value(1)
+                return key
         row.value(1)
-    return None
+
 
 def play_note(note, duration, volume):
     frequency = int(note_mappings[note])
@@ -117,14 +118,27 @@ def home_screen():
 
 def music_screen():
     clear_screen()
-    screen.text("Playing music!", 26, 0)
-    screen.text("* for home.", 26, 8)
+    screen.text("Playing", 26, 0)
+    screen.text("music!", 26, 10)
+    screen.text("* for home.", 26, 24)
 
 def stopwatch_screen(seconds):
-    pass
+    clear_screen()
+    minutes, seconds = convert_time(seconds)
+
+    screen.text("Stopwatch", 26, 0)
+    screen.text(f"Time: {minutes:02}:{seconds:02}", 15, 22)
+    screen.text("* for home.", 26, 42)
+    screen.show()
 
 def timer_screen(seconds):
-    pass
+    clear_screen()
+    minutes, seconds = convert_time(seconds)
+
+    screen.text("Timer", 26, 0)
+    screen.text(f"Time: {minutes:02}:{seconds:02}", 15, 22)
+    screen.text("* for home.", 26, 42)
+    screen.show()
 
 print("Functions defined!")
 
@@ -138,9 +152,11 @@ screen_functions = {
 # Main code 
 current_screen = "home"
 vol = 0
-timer = 0
+timer = 60
+stopwatch = 0
 input_string = ""
 note_cursor = 0
+play_music = True
 
 home_screen()
 while True:
@@ -160,8 +176,15 @@ while True:
         print(f"Key: {pressed_key}")
 
         if pressed_key == "#":
-            print("Quitting dashboard...")
+            clear_screen()
+            screen.text("Quitting", 10, 8)
+            screen.text("dashboard...", 10, 18)
+            screen.show()
             break
+        elif pressed_key == "*":
+            current_screen = "home"
+            clear_screen()
+            home_screen()
         
         if current_screen == "home":
             if pressed_key == "A":
@@ -169,17 +192,29 @@ while True:
                 music_screen()
 
             elif pressed_key == "B":
-                current_screen = "timer"
+                current_screen = "stopwatch"
+                stopwatch_seconds = 0
+                stopwatch_screen(stopwatch_seconds)
 
             elif pressed_key == "C":
-                current_screen = "stopwatch"
+                current_screen = "timer"
+                timer_seconds = 60
+                timer_screen(timer_seconds)
+        elif current_screen == "music":
+            if pressed_key == "A":
+                play_music = True
+            elif pressed_key == "B":
+                play_music = True
             
     if current_screen == "timer":
         timer_screen()
         timer -= 1
 
-    if current_screen == "music":
-        note_cursor += 1
+    if play_music:
+        if note_cursor == len(note_list) - 1:
+            note_cursor = 0
+        else:
+            note_cursor += 1
         # play_note()
 
     screen.show()

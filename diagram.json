@@ -21,7 +21,7 @@
       "type": "wokwi-led-bar-graph",
       "id": "wokwi-led-bar-graph-0",
       "top": 302.4,
-      "left": -283.2,
+      "left": -312,
       "attrs": {}
     },
     {
@@ -60,7 +60,7 @@
     [ "wokwi-led-bar-graph-0:C8", "esp:GND.1", "orange", [ "h48.22", "v-0.01" ] ],
     [ "wokwi-led-bar-graph-0:C9", "esp:GND.1", "orange", [ "h0" ] ],
     [ "wokwi-led-bar-graph-0:C10", "esp:GND.1", "orange", [ "h48.22", "v-9.61" ] ],
-    [ "wokwi-led-bar-graph-0:A1", "esp:13", "blue", [ "h0", "v-9.6", "h105.6", "v96" ] ],
+    [ "wokwi-led-bar-graph-0:A1", "esp:13", "blue", [ "v-9.6", "h124.8", "v96" ] ],
     [ "wokwi-led-bar-graph-0:A2", "esp:12", "blue", [ "h-19.2", "v-48", "h144", "v105.6" ] ],
     [ "wokwi-led-bar-graph-0:A3", "esp:14", "blue", [ "h-19.2", "v-57.6", "h144", "v96" ] ],
     [ "wokwi-led-bar-graph-0:A4", "esp:27", "blue", [ "h-19.2", "v-67.2", "h144", "v86.4" ] ],
@@ -79,7 +79,7 @@
     [ "esp:5", "keypad1:C3", "blue", [ "h153.6", "v115.2", "h144.15" ] ],
     [ "esp:35", "keypad1:C4", "blue", [ "h-9.45", "v-86.4", "h163.2", "v249.6", "h249.9" ] ],
     [ "bz1:1", "esp:23", "blue", [ "v0", "h-86.4", "v-288" ] ],
-    [ "bz1:2", "esp:GND.3", "orange", [ "h28.4", "v-240" ] ]
+    [ "bz1:2", "esp:GND.3", "orange", [ "h28.4", "v-268.8", "h-144" ] ]
   ],
   "serialMonitor": { "display": "auto", "newline": "lf", "convertEol": false },
   "dependencies": {}
